@@ -68,4 +68,12 @@ class UkVerificationPolicyTest {
                 () -> policy.requirementsFor(null)
         );
     }
+
+    @Test
+    void shouldRejectBusinessWithoutLegalEntityType() {
+        assertThrows(
+                NullPointerException.class,
+                () -> new Business(Country.UNITED_KINGDOM, null)
+        );
+    }
 }

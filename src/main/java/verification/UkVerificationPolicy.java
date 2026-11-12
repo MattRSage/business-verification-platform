@@ -11,7 +11,7 @@ public class UkVerificationPolicy implements VerificationPolicy {
             throw new IllegalArgumentException();
         }
 
-        if (business.country() == Country.GERMANY){
+        if (business.country() != Country.UNITED_KINGDOM){
             throw new UnsupportedCountryException();
         }
 
