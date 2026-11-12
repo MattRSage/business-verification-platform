@@ -7,6 +7,14 @@ public class UkVerificationPolicy implements VerificationPolicy {
     @Override
     public Set<RequirementType> requirementsFor(Business business) {
 
+        if (business == null) {
+            throw new IllegalArgumentException();
+        }
+
+        if (business.country() == Country.GERMANY){
+            throw new UnsupportedCountryException();
+        }
+
         return switch (business.legalEntityType()) {
             case LIMITED_COMPANY -> Set.of(
                     RequirementType.BENEFICIAL_OWNER_DETAILS,
