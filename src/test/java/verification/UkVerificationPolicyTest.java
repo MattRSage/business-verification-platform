@@ -59,6 +59,25 @@ class UkVerificationPolicyTest {
         );
     }
 
+
+    @Test
+    void shouldRejectBusinessWithUnsupportedCountry() {
+        // Arrange
+        Business business = new Business(
+                Country.GERMANY,
+                LegalEntityType.LIMITED_COMPANY
+        );
+
+        VerificationPolicy policy = new UkVerificationPolicy();
+
+        // Act & Assert
+        assertThrows(
+                UnsupportedCountryException.class,
+                () -> policy.requirementsFor(business)
+        );
+    }
+
+
     @Test
     void shouldRejectNullBusiness() {
         VerificationPolicy policy = new UkVerificationPolicy();
@@ -74,14 +93,6 @@ class UkVerificationPolicyTest {
         assertThrows(
                 NullPointerException.class,
                 () -> new Business(Country.UNITED_KINGDOM, null)
-        );
-    }
-
-    @Test
-    void shouldRejectBusinessWithUnsupportedCountry() {
-        assertThrows(
-                NullPointerException.class,
-                () -> new Business(Country.GERMANY, LegalEntityType.LIMITED_COMPANY)
         );
     }
 }
