@@ -6,9 +6,15 @@ public class UkVerificationPolicy implements VerificationPolicy {
 
     @Override
     public Set<RequirementType> requirementsFor(Business business) {
-        return Set.of(
-                RequirementType.BENEFICIAL_OWNER_DETAILS,
-                RequirementType.COMPANY_REGISTRATION,
-                RequirementType.DIRECTOR_DETAILS);
+
+        return switch (business.legalEntityType()) {
+            case LIMITED_COMPANY -> Set.of(
+                    RequirementType.BENEFICIAL_OWNER_DETAILS,
+                    RequirementType.COMPANY_REGISTRATION,
+                    RequirementType.DIRECTOR_DETAILS);
+            case SOLE_TRADER -> Set.of(
+                    RequirementType.IDENTITY,
+                    RequirementType.BUSINESS_ADDRESS);
+        };
     }
 }

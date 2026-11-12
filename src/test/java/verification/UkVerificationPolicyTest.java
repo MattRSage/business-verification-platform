@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 class UkVerificationPolicyTest {
 
@@ -28,6 +29,30 @@ class UkVerificationPolicyTest {
                         RequirementType.COMPANY_REGISTRATION,
                         RequirementType.DIRECTOR_DETAILS,
                         RequirementType.BENEFICIAL_OWNER_DETAILS
+                ),
+                requirements
+        );
+    }
+
+    @Test
+    void shouldReturnRequirementsForUkSoleTrader() {
+        // Arrange
+        Business business = new Business(
+                Country.UNITED_KINGDOM,
+                LegalEntityType.SOLE_TRADER
+        );
+
+        VerificationPolicy policy = new UkVerificationPolicy();
+
+        // Act
+        Set<RequirementType> requirements =
+                policy.requirementsFor(business);
+
+        // Assert
+        assertEquals(
+                Set.of(
+                        RequirementType.IDENTITY,
+                        RequirementType.BUSINESS_ADDRESS
                 ),
                 requirements
         );
