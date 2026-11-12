@@ -76,4 +76,12 @@ class UkVerificationPolicyTest {
                 () -> new Business(Country.UNITED_KINGDOM, null)
         );
     }
+
+    @Test
+    void shouldRejectBusinessWithUnsupportedCountry() {
+        assertThrows(
+                NullPointerException.class,
+                () -> new Business(Country.GERMANY, LegalEntityType.LIMITED_COMPANY)
+        );
+    }
 }
