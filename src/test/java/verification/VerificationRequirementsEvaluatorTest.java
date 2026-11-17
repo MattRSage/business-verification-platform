@@ -70,8 +70,8 @@ public class VerificationRequirementsEvaluatorTest {
 
         // Assert
         assertEquals(
-                missing,
-                Set.of()
+                Set.of(),
+                missing
         );
     }
 
@@ -95,11 +95,12 @@ public class VerificationRequirementsEvaluatorTest {
 
         // Assert
         assertEquals(
-                missing,
                 Set.of(
                         RequirementType.COMPANY_REGISTRATION,
                         RequirementType.DIRECTOR_DETAILS
-                )
+                ),
+                missing
+
         );
     }
 
@@ -132,10 +133,11 @@ public class VerificationRequirementsEvaluatorTest {
 
         // Assert
         assertEquals(
-                missing,
                 Set.of(
                         RequirementType.DIRECTOR_DETAILS
-                )
+                ),
+                missing
+
         );
     }
 }
