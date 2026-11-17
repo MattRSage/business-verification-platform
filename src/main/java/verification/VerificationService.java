@@ -1,5 +1,8 @@
 package verification;
 
+import java.util.List;
+import java.util.Set;
+
 public class VerificationService {
 
     private final VerificationPolicy verificationPolicy;
@@ -11,5 +14,18 @@ public class VerificationService {
     ) {
         this.verificationPolicy = verificationPolicy;
         this.verificationRequirementsEvaluator = verificationRequirementsEvaluator;
+    }
+
+    public Set<RequirementType> findMissingRequirements(
+            Business business,
+            List<VerificationSubmission> submissions
+    )
+    {
+        var requirements = this.verificationPolicy.requirementsFor(business);
+
+        return this.verificationRequirementsEvaluator
+                .findMissingRequirements(
+                        requirements,
+                        submissions);
     }
 }
